@@ -36,18 +36,47 @@ const fields = [
       {value: 'medium', description: 'Medium'},
       {value: 'large', description: 'Large'},
     ]
-  }
+  },
+  {
+    type: 'radio',
+    title: 'Choose Sauce',
+    description: 'Required',
+    name: 'sauce',
+    options: [
+      {value: 'original-red', description: 'Original Red'},
+      {value: 'garlic-ranch', description: 'Garlic Ranch'},
+      {value: 'bbq-sauce', description: 'BBQ Sauce'},
+      {value: 'spinach-alfredo', description: 'Spinach Alfredo'},
+    ]
+  },
+
 ]
 
 function FieldBulider({fieldData, values, onChange}){
   console.log(fieldData, values, onChange)
+
   function Select(){
     return (
       <select value={values[fieldData.name]} name={fieldData.name} onChange={onChange}>
         {fieldData.options.map( option => {
-          return <option value={option.value}>{option.description}</option>
+          return <option key={option.value} value={option.value}>{option.description}</option>
         })}
       </select>
+    )
+  }
+
+  function Radio(){
+    return (
+      <div>
+        {fieldData.options.map( option => {
+          return (
+            <label>
+              <input type='radio' name={fieldData.name} value={option.value} checked={option.value === values[fieldData.name]} onChange={onChange}/>
+              {option.description}
+            </label>
+          )
+        })}
+      </div>
     )
   }
 
@@ -55,9 +84,8 @@ function FieldBulider({fieldData, values, onChange}){
     <label key={fieldData.title}>
       <h3>{fieldData.title}</h3>
       <p>{fieldData.description}</p>
-      {
-        fieldData.type === 'select' && <Select />
-      }
+      {fieldData.type === 'select' && <Select />}
+      {fieldData.type === 'radio' && <Radio />}
     </label>
   )
 }
