@@ -70,6 +70,14 @@ const fields = [
       'extra-cheese',
     ]
   },
+  {
+    type: 'checkbox',
+    title: 'Gluten Free',
+    description: 'Optional',
+    options: [
+      'gluten-free',
+    ]
+  }
 ]
 
 function FieldBulider({fieldData, values, onChange}){
@@ -146,99 +154,6 @@ export default function Pizza(){
       <Link to='/'>Home</Link>
       <form>
         {fields.map( field => <FieldBulider key={field.title} fieldData={field} values={values} onChange={onChange}/>)}
-
-        <label>
-          <h3>Choose Size</h3>
-          <p>Required</p>
-          <select value={values.size} name='size' onChange={onChange}>
-            <option value=''>Select Size</option>
-            <option value='small'>Small</option>
-            <option value='medium'>Medium</option>
-            <option value='large'>Large</option>
-          </select>
-        </label>
-
-        <label>
-          <h3>Choose Sauce</h3>
-          <p>Required</p>
-          <label>
-            <input type="radio" name="sauce" value="original-red" checked={values.sauce === 'original-red'} onChange={onChange}/>
-            Original Red
-          </label>
-          <label>
-            <input type="radio" name="sauce" value="garlic-ranch" checked={values.sauce === 'garlic-ranch'} onChange={onChange}/>
-            Garlic Ranch
-          </label>
-          <label>
-            <input type="radio" name="sauce" value="bbq-sauce" checked={values.sauce === 'bbq-sauce'} onChange={onChange}/>
-            BBQ Sauce
-          </label>
-          <label>
-            <input type="radio" name="sauce" value="spinach-alfredo" checked={values.sauce === 'spinach-alfredo'} onChange={onChange}/>
-            Spinach Alfredo
-          </label>
-        </label>
-
-        <label>
-          <h3>Add Toppings</h3>
-          <p>Choose up to 10</p>
-          <label> 
-            <input type='checkbox' name='' onChange={onChange}/>
-            
-          </label>
-          <label> 
-            <input type='checkbox' name='' onChange={onChange}/>
-            
-          </label>
-          <label> 
-            <input type='checkbox' name='' onChange={onChange}/>
-            
-          </label>
-          <label> 
-            <input type='checkbox' name='' onChange={onChange}/>
-            
-          </label>
-          <label> 
-            <input type='checkbox' name='' onChange={onChange}/>
-            
-          </label>
-          <label> 
-            <input type='checkbox' name='' onChange={onChange}/>
-            
-          </label>
-          <label> 
-            <input type='checkbox' name='' onChange={onChange}/>
-            
-          </label>
-          <label> 
-            <input type='checkbox' name='' onChange={onChange}/>
-            
-          </label>
-          <label> 
-            <input type='checkbox' name='' onChange={onChange}/>
-            
-          </label>
-          <label> 
-            <input type='checkbox' name='' onChange={onChange}/>
-            
-          </label>
-          <label> 
-            <input type='checkbox' name='' onChange={onChange}/>
-            
-          </label>
-          <label> 
-            <input type='checkbox' name='' onChange={onChange}/>
-            
-          </label>
-          <label> 
-            <input type='checkbox' name='' onChange={onChange}/>
-            
-          </label>
-          <label> 
-            <input type='checkbox' name='' onChange={onChange}/>
-            
-          </label>
-        </label>
       </form>
     </div>
   )
