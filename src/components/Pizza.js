@@ -4,10 +4,62 @@ import { Link } from 'react-router-dom';
 const initialValues = {
   size: '',
   sauce: '',
-  toppings: [],
-  subsitute: false,
+  'gluten-free': false,
   instructions: '',
-  quantity: 1
+  quantity: 1,
+
+  pepperoni: false,
+  sausage: false,
+  'canadian-bacon': false,
+  'spicy-italian-sausage': false,
+  'grilled-chicken': false,
+  onions: false,
+  'green-peper': false,
+  'diced-tomatoes': false,
+  'black-olives': false,
+  'roasted-garlic': false,
+  'artichoke-hearts': false,
+  'three-cheese': false,
+  pinapple: false,
+  'extra-cheese': false
+}
+
+const fields = [
+  {
+    type: 'select',
+    title: 'Choose Size',
+    description: 'Required',
+    name: 'size',
+    options: [
+      {value: '', description: 'Select Size'},
+      {value: 'small', description: 'Small'},
+      {value: 'medium', description: 'Medium'},
+      {value: 'large', description: 'Large'},
+    ]
+  }
+]
+
+function FieldBulider({fieldData, values, onChange}){
+  console.log(fieldData, values, onChange)
+  function Select(){
+    return (
+      <select value={values[fieldData.name]} name={fieldData.name} onChange={onChange}>
+        {fieldData.options.map( option => {
+          return <option value={option.value}>{option.description}</option>
+        })}
+      </select>
+    )
+  }
+
+  return (
+    <label key={fieldData.title}>
+      <h3>{fieldData.title}</h3>
+      <p>{fieldData.description}</p>
+      {
+        fieldData.type === 'select' && <Select />
+      }
+    </label>
+  )
 }
 
 export default function Pizza(){
@@ -25,6 +77,8 @@ export default function Pizza(){
     <div>
       <Link to='/'>Home</Link>
       <form>
+        {fields.map( field => <FieldBulider key={field.title} fieldData={field} values={values} onChange={onChange}/>)}
+
         <label>
           <h3>Choose Size</h3>
           <p>Required</p>
@@ -54,6 +108,67 @@ export default function Pizza(){
           <label>
             <input type="radio" name="sauce" value="spinach-alfredo" checked={values.sauce === 'spinach-alfredo'} onChange={onChange}/>
             Spinach Alfredo
+          </label>
+        </label>
+
+        <label>
+          <h3>Add Toppings</h3>
+          <p>Choose up to 10</p>
+          <label> 
+            <input type='checkbox' name='' onChange={onChange}/>
+            
+          </label>
+          <label> 
+            <input type='checkbox' name='' onChange={onChange}/>
+            
+          </label>
+          <label> 
+            <input type='checkbox' name='' onChange={onChange}/>
+            
+          </label>
+          <label> 
+            <input type='checkbox' name='' onChange={onChange}/>
+            
+          </label>
+          <label> 
+            <input type='checkbox' name='' onChange={onChange}/>
+            
+          </label>
+          <label> 
+            <input type='checkbox' name='' onChange={onChange}/>
+            
+          </label>
+          <label> 
+            <input type='checkbox' name='' onChange={onChange}/>
+            
+          </label>
+          <label> 
+            <input type='checkbox' name='' onChange={onChange}/>
+            
+          </label>
+          <label> 
+            <input type='checkbox' name='' onChange={onChange}/>
+            
+          </label>
+          <label> 
+            <input type='checkbox' name='' onChange={onChange}/>
+            
+          </label>
+          <label> 
+            <input type='checkbox' name='' onChange={onChange}/>
+            
+          </label>
+          <label> 
+            <input type='checkbox' name='' onChange={onChange}/>
+            
+          </label>
+          <label> 
+            <input type='checkbox' name='' onChange={onChange}/>
+            
+          </label>
+          <label> 
+            <input type='checkbox' name='' onChange={onChange}/>
+            
           </label>
         </label>
       </form>
