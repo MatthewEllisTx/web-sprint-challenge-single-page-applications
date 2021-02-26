@@ -8,19 +8,19 @@ const initialValues = {
   instructions: '',
   quantity: 1,
 
-  pepperoni: false,
-  sausage: false,
+  'pepperoni': false,
+  'sausage': false,
   'canadian-bacon': false,
   'spicy-italian-sausage': false,
   'grilled-chicken': false,
-  onions: false,
+  'onions': false,
   'green-peper': false,
   'diced-tomatoes': false,
   'black-olives': false,
   'roasted-garlic': false,
   'artichoke-hearts': false,
   'three-cheese': false,
-  pinapple: false,
+  'pinapple': false,
   'extra-cheese': false
 }
 
@@ -43,17 +43,41 @@ const fields = [
     description: 'Required',
     name: 'sauce',
     options: [
-      {value: 'original-red', description: 'Original Red'},
-      {value: 'garlic-ranch', description: 'Garlic Ranch'},
-      {value: 'bbq-sauce', description: 'BBQ Sauce'},
-      {value: 'spinach-alfredo', description: 'Spinach Alfredo'},
+      'original-red',
+      'garlic-ranch',
+      'bbq-sauce',
+      'spinach-alfredo',
     ]
   },
-
+  {
+    type: 'checkbox',
+    title: 'Choose Toppings',
+    description: 'Choose up to 10',
+    options: [
+      'pepperoni',
+      'sausage',
+      'canadian-bacon',
+      'spicy-italian-sausage',
+      'grilled-chicken',
+      'onions',
+      'green-peper',
+      'diced-tomatoes',
+      'black-olives',
+      'roasted-garlic',
+      'artichoke-hearts',
+      'three-cheese',
+      'pinapple',
+      'extra-cheese',
+    ]
+  },
 ]
 
 function FieldBulider({fieldData, values, onChange}){
   console.log(fieldData, values, onChange)
+
+  function upperCaseRemoveDash(string){
+    return string.split('-').reduce( (accumlator, currentValue) => accumlator + currentValue.charAt(0).toUpperCase() + currentValue.slice(1) + ' ', '')
+  }
 
   function Select(){
     return (
@@ -70,9 +94,24 @@ function FieldBulider({fieldData, values, onChange}){
       <div>
         {fieldData.options.map( option => {
           return (
-            <label>
-              <input type='radio' name={fieldData.name} value={option.value} checked={option.value === values[fieldData.name]} onChange={onChange}/>
-              {option.description}
+            <label key={option}>
+              <input type='radio' name={fieldData.name} value={option} checked={option === values[fieldData.name]} onChange={onChange}/>
+              {upperCaseRemoveDash(option)}
+            </label>
+          )
+        })}
+      </div>
+    )
+  }
+
+  function Checkbox(){
+    return(
+      <div>
+        {fieldData.options.map( option => {
+          return (
+            <label key={option}>
+              <input type='checkbox' name={option} checked={values[option]} onChange={onChange}/>
+              {upperCaseRemoveDash(option)}
             </label>
           )
         })}
@@ -86,6 +125,7 @@ function FieldBulider({fieldData, values, onChange}){
       <p>{fieldData.description}</p>
       {fieldData.type === 'select' && <Select />}
       {fieldData.type === 'radio' && <Radio />}
+      {fieldData.type === 'checkbox' && <Checkbox />}
     </label>
   )
 }
