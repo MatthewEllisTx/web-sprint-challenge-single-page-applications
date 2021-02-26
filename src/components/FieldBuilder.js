@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function FieldBulider({fieldData, values, onChange}){
-  console.log(fieldData, values, onChange)
+  //console.log(fieldData, values, onChange)
 
   function upperCaseRemoveDash(string){
     return string.split('-').reduce( (accumlator, currentValue) => accumlator + currentValue.charAt(0).toUpperCase() + currentValue.slice(1) + ' ', '')
@@ -33,7 +33,7 @@ export default function FieldBulider({fieldData, values, onChange}){
   }
 
   function Checkbox(){
-    return(
+    return (
       <div>
         {fieldData.options.map( option => {
           return (

@@ -79,7 +79,7 @@ const fields = [
     options: [
       'gluten-free',
     ]
-  }
+  },
 ]
 
 export default function Pizza(){
@@ -93,11 +93,20 @@ export default function Pizza(){
     setValues({ ...values, [name]: value})
   }
 
+  function onSubmit(evt){
+    evt.preventDefault();
+  }
+
   return (
     <div>
       <Link to='/'>Home</Link>
       <form>
         {fields.map( field => <FieldBulider key={field.title} fieldData={field} values={values} onChange={onChange}/>)}
+        <label>
+          <h3>Anything you'd like to add?</h3>
+          <p>Optional</p>
+          <input type='text' name='instructions' value={values.instructions} placeholder='Start typing here...' onChange={onChange}/>
+        </label>
       </form>
     </div>
   )
