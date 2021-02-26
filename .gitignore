@@ -1,3 +1,11 @@
+#ignore cypress tests
+/cypress/**/*
+
+# unignore my tests
+!/cypress/integration/
+!/cypress/integration/MyTests/
+!/cypress/integration/MyTests/*
+
 # Logs
 logs
 *.log
