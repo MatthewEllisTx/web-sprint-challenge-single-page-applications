@@ -11,7 +11,7 @@ const App = () => {
       <h1>Lambda Eats</h1>
       <Switch>
         <Route path='/pizza/confirmed'>
-          <Confirmed a/>
+          <Confirmed />
         </Route>
         
         <Route path='/pizza'>
