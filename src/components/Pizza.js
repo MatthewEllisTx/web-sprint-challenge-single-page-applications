@@ -191,6 +191,18 @@ export default function Pizza(){
     setFormattedValues(allValues);
   }
 
+  function confirm(){
+    // post or whatever
+    
+    //reset form
+    setCheckout(false);
+    setValues(initialValues);
+  }
+
+  function cancel(){
+    setCheckout(false);
+  }
+
   return (
     <div>
       {!checkout && <Link to='/'>Home</Link>}
@@ -221,6 +233,8 @@ export default function Pizza(){
         <div>
           <h2>Confirm order</h2>
           {Object.entries(formattedValues).map( value => <h4 key={value[0]}>{formatWords(value[0])}: {formatWords(value[1])}</h4>)}
+          <button onClick={cancel}>Cancel</button>
+          <Link to='/pizza/confirmed' onClick={confirm}>Submit</Link>
         </div>
       }
     </div>
