@@ -101,9 +101,22 @@ const fields = [
   },
 ]
 
+function formatWords(words){
+  function upperCaseRemoveDash(string){
+    return string.split('-').reduce( (accumlator, currentValue) => accumlator + currentValue.charAt(0).toUpperCase() + currentValue.slice(1) + ' ', '')
+  }
+  if(typeof(words) === 'object')
+    return words.map( word => upperCaseRemoveDash(word)).join(', ')
+  else if(typeof(words) === 'string')
+    return upperCaseRemoveDash(words)
+  return words
+}
+
 export default function Pizza(){
   const [ values, setValues ] = useState(initialValues);
   const [ disabled, setDisabled ] = useState(true);
+  const [ checkout, setCheckout ] = useState(false);
+  const [ formattedValues, setFormattedValues ] = useState();
 
   async function validateParam(name, value){
     let test;
@@ -165,32 +178,51 @@ export default function Pizza(){
 
   function onSubmit(evt){
     evt.preventDefault();
+    const toppingValues = Object.keys(values).filter( top => values[top] === true && toppings.indexOf[top] !== -1)
+    const allValues = {
+      size: values.size,
+      sauce: values.sauce,
+      toppings: toppingValues,
+      'gluten-free': values['gluten-free'],
+      instructions: values.instructions,
+      quantity: values.quantity,
+    }
+    setCheckout(true);
+    setFormattedValues(allValues);
   }
 
   return (
     <div>
-      <Link to='/'>Home</Link>
-      <form>
-        
-        {fields.map( field => <FieldBulider key={field.title} fieldData={field} values={values} onChange={onChange}/>)}
-        
-        <label>
-          <h3>Quantity</h3>
-          <input type='number' min='1' name='quantity' value={values.quantity} onChange={onChange}/>
-        </label>
-        
-        <label>
-          <h3>Anything you'd like to add?</h3>
-          <p>Optional</p>
-          <input type='text' name='instructions' value={values.instructions} placeholder='Start typing here...' maxLength='280' onChange={onChange}/>
-        </label>
+      {!checkout && <Link to='/'>Home</Link>}
+      {!checkout && 
+        <form onSubmit={onSubmit}>
+          
+          {fields.map( field => <FieldBulider key={field.title} fieldData={field} values={values} onChange={onChange}/>)}
+          
+          <label>
+            <h3>Quantity</h3>
+            <input type='number' min='1' name='quantity' value={values.quantity} onChange={onChange}/>
+          </label>
+          
+          <label>
+            <h3>Anything you'd like to add?</h3>
+            <p>Optional</p>
+            <input type='text' name='instructions' value={values.instructions} placeholder='Start typing here...' maxLength='280' onChange={onChange}/>
+          </label>
 
+          <div>
+            <button type='submit' disabled={disabled}>
+              Submit
+            </button>
+          </div>
+        </form>
+      }
+      {checkout && 
         <div>
-          <button type='submit' disabled={disabled}>
-            Submit
-          </button>
+          <h2>Confirm order</h2>
+          {Object.entries(formattedValues).map( value => <h4 key={value[0]}>{formatWords(value[0])}: {formatWords(value[1])}</h4>)}
         </div>
-      </form>
+      }
     </div>
   )
 }
