@@ -125,13 +125,13 @@ export default function Pizza(){
     } catch (e) {
       test = e;
     }
-    console.log(test)
+    //console.log(test)
     return test == value ? true : false;
   }
 
   async function onChange(evt){
 
-    console.log(evt.target);
+    //console.log(evt.target);
     const { name, type } = evt.target;
     const value = type === 'checkbox' ? evt.target.checked : evt.target.value;
 
@@ -148,7 +148,7 @@ export default function Pizza(){
           }
         }
       })
-      console.log(valueToTest)
+      //console.log(valueToTest)
       nameToTest = 'toppings';
     }
 
@@ -168,11 +168,11 @@ export default function Pizza(){
       quantity: values.quantity,
     }
 
-    schema.validate(allValues, {abortEarly: false})
-      .then( () =>{
+    // schema.validate(allValues, {abortEarly: false})
+    //   .then( () =>{
 
-      })
-      .catch( err => console.log(err.errors))
+    //   })
+    //   .catch( err => console.log(err.errors))a
     schema.isValid(allValues)
       .then( valid => {
         if(valid === disabled)

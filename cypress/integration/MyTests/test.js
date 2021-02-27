@@ -94,6 +94,8 @@ describe('forms test', () => {
     
     url().should('contain', 'pizza')
 
+    button().should('be.disabled')
+
     select().select('Small')
 
     originalRed().click()
@@ -118,10 +120,12 @@ describe('forms test', () => {
 
     gluten().click()
 
-    //quantity().click()
+    quantity().type('{uparrow}{uparrow}').click().should('have.value', 3)
 
-    //details().type("Carbonisé s'il vous plaî")
+    quantity().type('{downarrow}{downarrow}{downarrow}{downarrow}').should('have.value', 1)
 
-    button().should('exist')
+    details().type("Carbonisé s'il vous plaî")
+
+    button().click()
   })
 })
