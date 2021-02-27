@@ -66,7 +66,7 @@ const fields = [
     options: [
       'original-red',
       'garlic-ranch',
-      'bbq-sauce',
+      'barbque-sauce',
       'spinach-alfredo',
     ]
   },
