@@ -125,7 +125,7 @@ export default function Pizza(){
     } catch (e) {
       test = e;
     }
-
+    console.log(test)
     return test == value ? true : false;
   }
 
@@ -158,7 +158,7 @@ export default function Pizza(){
   }
 
   useEffect( () => {
-    const toppingValues = Object.keys(values).filter( top => values[top] === true && toppings.indexOf[top] !== -1)
+    const toppingValues = Object.keys(values).filter( top => values[top] === true && toppings.indexOf([top]) !== -1)
     const allValues = {
       size: values.size,
       sauce: values.sauce,
@@ -167,6 +167,12 @@ export default function Pizza(){
       instructions: values.instructions,
       quantity: values.quantity,
     }
+
+    schema.validate(allValues, {abortEarly: false})
+      .then( () =>{
+
+      })
+      .catch( err => console.log(err.errors))
     schema.isValid(allValues)
       .then( valid => {
         if(valid === disabled)
@@ -178,7 +184,7 @@ export default function Pizza(){
 
   function onSubmit(evt){
     evt.preventDefault();
-    const toppingValues = Object.keys(values).filter( top => values[top] === true && toppings.indexOf[top] !== -1)
+    const toppingValues = Object.keys(values).filter( top => values[top] === true && toppings.indexOf([top]) !== -1)
     const allValues = {
       size: values.size,
       sauce: values.sauce,
