@@ -2,8 +2,9 @@
 /cypress/**/*
 
 # unignore my tests
-!/cypress/MyTests
-!/cypress/MyTests/*
+!/cypress/integration/
+!/cypress/integration/MyTests/
+!/cypress/integration/MyTests/*
 
 # Logs
 logs
