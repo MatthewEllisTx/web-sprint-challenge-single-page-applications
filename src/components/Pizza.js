@@ -129,14 +129,13 @@ export default function Pizza(){
       nameToTest = name;
     } else {
       valueToTest = Object.entries(values).filter( keyPair => {
-        
         if(toppings.indexOf(keyPair[0]) !== -1){
           if(keyPair[1] === true || keyPair[0] === name){
-            const key = keyPair[0];
-            return keyPair[0];
+            return keyPair[0]; // with .filter it just returns keypair, but that's fine because we're just testing length
           }
         }
       })
+      console.log(valueToTest)
       nameToTest = 'toppings';
     }
 
@@ -144,6 +143,25 @@ export default function Pizza(){
     if(set)
       setValues({ ...values, [name]: value})
   }
+
+  useEffect( () => {
+    const toppingValues = Object.keys(values).filter( top => values[top] === true && toppings.indexOf[top] !== -1)
+    const allValues = {
+      size: values.size,
+      sauce: values.sauce,
+      toppings: toppingValues,
+      'gluten-free': values['gluten-free'],
+      instructions: values.instructions,
+      quantity: values.quantity,
+    }
+    schema.isValid(allValues)
+      .then( valid => {
+        if(valid === disabled)
+          setDisabled(!valid)
+      })
+      .catch( err => console.log(err))
+
+  }, [values, disabled])
 
   function onSubmit(evt){
     evt.preventDefault();
