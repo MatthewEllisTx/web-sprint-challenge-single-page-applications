@@ -158,7 +158,7 @@ export default function Pizza(){
   }
 
   useEffect( () => {
-    const toppingValues = Object.keys(values).filter( top => values[top] === true && toppings.indexOf([top]) !== -1)
+    const toppingValues = Object.keys(values).filter( top => values[top] === true && toppings.indexOf(top) !== -1)
     const allValues = {
       size: values.size,
       sauce: values.sauce,
@@ -184,7 +184,7 @@ export default function Pizza(){
 
   function onSubmit(evt){
     evt.preventDefault();
-    const toppingValues = Object.keys(values).filter( top => values[top] === true && toppings.indexOf([top]) !== -1)
+    const toppingValues = Object.keys(values).filter( top => values[top] === true && toppings.indexOf(top) !== -1)
     const allValues = {
       size: values.size,
       sauce: values.sauce,
